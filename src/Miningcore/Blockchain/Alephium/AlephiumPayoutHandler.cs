@@ -109,6 +109,8 @@ public class AlephiumPayoutHandler : PayoutHandlerBase,
 
                 List<Settlement> blockRewardTransactions;
                 BlockEntry blockInfo;
+                // First output is always the mainchain reward FixedOutputs[0] and [1] and [2] would be uncles (if exist)
+                int blockRewardTransactionIndex = 0;
 
                 var isBlockInMainChain = await Guard(() => alephiumClient.GetBlockflowIsBlockInMainChainAsync((string) block.Hash, ct),
                     ex=> logger.Debug(ex));
@@ -145,6 +147,14 @@ public class AlephiumPayoutHandler : PayoutHandlerBase,
                         blockRewardTransactions = blockInfo.Transactions
                             .Where(x => x.Unsigned.Inputs.Count < 1)
                             .ToList();
+
+                        // Get the index of our uncle (by HASH value) - either 0 or 1 (2 max uncles)
+                        var ghostUncleIndex = blockInfo.GhostUncles
+                            .ToList()
+                            .FindIndex(u => u.BlockHash == block.Hash);
+
+                        // Advance index pointer +1 due to mainchain reward
+                        blockRewardTransactionIndex = ghostUncleIndex + 1;
                     }
                 }
                 else
@@ -176,11 +186,9 @@ public class AlephiumPayoutHandler : PayoutHandlerBase,
                     blockRewardTransactions = blockRewardTransactions
                         .Where(x =>
                         {
-                            var fixedOutputs = x.Unsigned.FixedOutputs
-                                .Where(y => walletMinersAddresses.Addresses.Contains(y.Address))
-                                .ToList();
+                            var fixedOutput = x.Unsigned.FixedOutputs.ElementAtOrDefault(blockRewardTransactionIndex);
 
-                            return fixedOutputs.Count > 0;
+                            return fixedOutput == null ? false : walletMinersAddresses.Addresses.Contains(fixedOutput.Address);
                         })
                         .ToList();
 
