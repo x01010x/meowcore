@@ -16,6 +16,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "allium.h"
+#include "aurum.h"
 #include "bcrypt.h"
 #include "keccak.h"
 #include "quark.h"
@@ -438,3 +439,9 @@ extern "C" MODULE_API void allium_export(const char *input, char *output, uint32
 {
     allium_hash(input, output, input_len);
 }
+
+extern "C" MODULE_API void aurum_export(const char *input, char *output, uint32_t input_len)
+{
+	aurum_hash(input, output, input_len);
+}
+
