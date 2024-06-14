@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       with:
         fetch-depth: 0    
     - name: Install Build dependencies
-      run: sudo apt-get install -y cmake cmake ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libgmp-dev
+      run: sudo apt-get install -y cmake cmake ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5-dev libgmp-dev
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
