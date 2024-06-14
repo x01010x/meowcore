@@ -3576,6 +3576,34 @@
         "explorerTxLink": "https://explorer.widecoin.org/tx/{0}",
         "explorerAccountLink": "https://explorer.widecoin.org/address/{0}"
     },
+    "woodcoin": {
+        "name": "Woodcoin",
+        "canonicalName": "Woodcoin",
+        "symbol": "LOG",
+        "family": "bitcoin",
+        "website": "https://woodcoin.org/",
+        "market": "https://coinmarketcap.com/currencies/woodcoin/",
+        "twitter": "https://twitter.com/woodcoin_jp",
+        "telegram": "",
+        "discord": "",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "skein2"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "explorerBlockLink": "https://explorer.woodcoin.org/block/$hash$",
+        "explorerTxLink": "https://explorer.woodcoin.org/tx/{0}",
+        "explorerAccountLink": "https://explorer.woodcoin.org/address/{0}"
+    },
     "worldcoin": {
         "name": "Worldcoin",
         "canonicalName": "Worldcoin",
