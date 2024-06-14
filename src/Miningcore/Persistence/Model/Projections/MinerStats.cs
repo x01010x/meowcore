@@ -19,6 +19,7 @@ public class MinerStats
     public decimal TotalPaid { get; init; }
     public decimal TodayPaid { get; init; }
     public Payment LastPayment { get; set; }
+	public double? MinerEffort { get; set; }
     public WorkerPerformanceStatsContainer Performance { get; set; }
     public MinerWorkerPerformanceStats[] PerformanceStats { get; init; }
 }
