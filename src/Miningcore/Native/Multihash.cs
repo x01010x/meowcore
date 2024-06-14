@@ -172,6 +172,9 @@ public static unsafe class Multihash
     [DllImport("libmultihash", EntryPoint = "minotaurx_export", CallingConvention = CallingConvention.Cdecl)]
     public static extern void minotaurx(byte* input, void* output);
 
+    [DllImport("libmultihash", EntryPoint = "memehash_export", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void memehash(byte* input, void* output, uint inputLength);
+
     [DllImport("libmultihash", EntryPoint = "skydoge_export", CallingConvention = CallingConvention.Cdecl)]
     public static extern void skydoge(byte* input, void* output, uint inputLength);
 

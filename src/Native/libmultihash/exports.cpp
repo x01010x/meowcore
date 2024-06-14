@@ -65,6 +65,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "yespower/yespower.h"
 #include "shake/cshake.h"
 #include "shake/shake.h"
+#include "memehash.h"
 
 #ifdef _WIN32
 #include "blake2/ref/blake2.h"
@@ -443,5 +444,10 @@ extern "C" MODULE_API void allium_export(const char *input, char *output, uint32
 extern "C" MODULE_API void aurum_export(const char *input, char *output, uint32_t input_len)
 {
 	aurum_hash(input, output, input_len);
+}
+
+extern "C" MODULE_API void memehash_export(const char *input, char *output, uint32_t input_len)
+{
+	meme_hash(input, output, input_len);
 }
 

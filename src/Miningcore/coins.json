@@ -1985,6 +1985,36 @@
         "explorerTxLink": "https://chainz.cryptoid.info/pak/tx.dws?{0}.htm",
         "explorerAccountLink": "https://chainz.cryptoid.info/pak/address.dws?{0}.htm"
     },
+    "pepepow": {
+        "name": "PepePow",
+        "canonicalName": "PepePow",
+        "symbol": "PEPEW",
+        "family": "bitcoin",
+        "website": "https://pepecore.com/",
+        "market": "",
+        "twitter": "https://twitter.com/pepepow_coin",
+        "telegram": "",
+        "discord": "https://discord.com/invite/jJgV73w8Zs",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "memehash"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "memehash"
+                }
+            ]
+        },
+        "hasMasterNodes": true,
+        "hasFoundation": true,
+        "explorerBlockLink": "https://explorer.pepecore.com/block/$hash$",
+        "explorerTxLink": "https://explorer.pepecore.com/tx/{0}",
+        "explorerAccountLink": "https://explorer.pepecore.com/address/{0}"
+    },
     "peercoin": {
         "name": "Peercoin",
         "canonicalName": "Peercoin",
