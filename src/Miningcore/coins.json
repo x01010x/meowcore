@@ -5155,5 +5155,19 @@
         "explorerBlockLink": "https://explorer.sedracoin.com/blocks/$hash$",
         "explorerTxLink": "https://explorer.sedracoin.com/txs/{0}",
         "explorerAccountLink": "https://explorer.sedracoin.com/addresses/{0}"
+    },
+	"kobradag": {
+        "name": "Kobradag",
+        "canonicalName": "Kobradag",
+        "symbol": "KODA",
+        "family": "kaspa",
+        "website": "https://k0bradag.com/",
+        "market": "",
+        "twitter": "https://twitter.com/k0bradag",
+        "telegram": "https://t.me/k0bradag",
+        "discord": "https://discord.com/invite/ahnm5zENqg",
+        "explorerBlockLink": "https://explorer.kobradag.online/blocks/$hash$",
+        "explorerTxLink": "https://explorer.kobradag.online/txs/{0}",
+        "explorerAccountLink": "https://explorer.kobradag.online/addresses/{0}"
     }
 }

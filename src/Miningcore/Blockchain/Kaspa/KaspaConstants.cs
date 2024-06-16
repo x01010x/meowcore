@@ -24,6 +24,15 @@ public static class HoosatConstants
     public const string ChainPrefixMainnet = "hoosat";
 }
 
+public static class KobradagConstants
+{
+    // List of Kobra prefixes: 
+    public const string ChainPrefixDevnet = "kobradev";
+    public const string ChainPrefixSimnet = "kobrasim";
+    public const string ChainPrefixTestnet = "kobratest";
+    public const string ChainPrefixMainnet = "kobra";
+}
+
 public static class KaspaConstants
 {
     public const string WalletDaemonCategory = "wallet";
