@@ -662,9 +662,9 @@
         "symbol": "CPU",
         "family": "bitcoin",
         "website": "https://cpuchain.org/",
-        "twitter": "",
-        "telegram": "",
-        "discord": "https://discordapp.com/invite/SUAgC9f",
+        "twitter": "https://twitter.com/cpuchain/",
+        "telegram": "https://t.me/cpuchainofficial/",
+        "discord": "",
         "coinbaseHasher": {
             "hash": "sha256d"
         },
@@ -680,9 +680,9 @@
             ]
         },
         "shareMultiplier": 65536,
-        "explorerBlockLink": "https://explorer.cpuchain.tech/block/$hash$",
-        "explorerTxLink": "https://explorer.cpuchain.tech/tx/{0}",
-        "explorerAccountLink": "https://explorer.cpuchain.tech/address/{0}"
+        "explorerBlockLink": "https://explorer.cpuchain.org/#/block/$hash$",
+        "explorerTxLink": "https://explorer.cpuchain.org/#/tx/{0}",
+        "explorerAccountLink": "https://explorer.cpuchain.org/#/address/{0}"
     },
     "danecoin": {
         "name": "Danecoin",
