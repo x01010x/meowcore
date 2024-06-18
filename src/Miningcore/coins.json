@@ -2516,6 +2516,36 @@
         "explorerTxLink": "https://exploreblockchain.clore.ai/tx/{0}",
         "explorerAccountLink": "https://exploreblockchain.clore.ai/address/{0}"
     },
+    "cmusicai": {
+        "name": "CmusicAI",
+        "symbol": "CMS",
+        "family": "progpow",
+        "website": "https://cmusic.ai/",
+        "market": "https://www.coingecko.com/en/coins/cmusicai",
+        "twitter": "https://twitter.com/cmusicai",
+        "telegram": "",
+        "discord": "https://discord.com/invite/EanhmGKxcg",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "sha256d"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "hasCommunityAddress": true,
+        "shareMultiplier": 1,
+        "progpower": "kawpow",
+        "explorerBlockLink": "https://explorer.cmusic.ai/block/$hash$",
+        "explorerTxLink": "https://explorer.cmusic.ai/tx/{0}",
+        "explorerAccountLink": "https://explorer.cmusic.ai/address/{0}"
+    },
     "meowcoin": {
         "name": "Meowcoin",
         "symbol": "MEWC",
