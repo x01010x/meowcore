@@ -140,7 +140,6 @@ public class PayoutManager : BackgroundService
 
                 if(equihashTemplate.UseBitcoinPayoutHandler)
                     return CoinFamily.Bitcoin;
-
                 break;
             
             case CoinFamily.Progpow:
@@ -168,8 +167,8 @@ public class PayoutManager : BackgroundService
                 {
                     if(!block.Effort.HasValue)  // fill block effort if empty
                         await CalculateBlockEffortAsync(pool, poolConfig, block, handler, ct);
-					
-					if(!block.MinerEffort.HasValue)  // fill block effort if empty
+
+                    if(!block.MinerEffort.HasValue)  // fill block effort if empty
                         await CalculateMinerEffortAsync(pool, poolConfig, block, handler, ct);
 
                     switch(block.Status)
@@ -250,14 +249,14 @@ public class PayoutManager : BackgroundService
             block.Effort = handler.AdjustBlockEffort(block.Effort.Value);
     }
 
-	private async Task CalculateMinerEffortAsync(IMiningPool pool, PoolConfig poolConfig, Block block, IPayoutHandler handler, CancellationToken ct)
+    private async Task CalculateMinerEffortAsync(IMiningPool pool, PoolConfig poolConfig, Block block, IPayoutHandler handler, CancellationToken ct)
     {
 
         // get share date-range
         var from = DateTime.MinValue;
         var to = block.Created;
 
-		var miner = block.Miner;
+	var miner = block.Miner;
 
         // get last block for pool
         var lastBlock = await cf.Run(con => blockRepo.GetMinerBlockBeforeAsync(con, poolConfig.Id, miner, new[]
@@ -270,14 +269,14 @@ public class PayoutManager : BackgroundService
         if(lastBlock != null)
             from = lastBlock.Created;
 
-		block.MinerEffort = await cf.Run(con => shareRepo.GetMinerShareDifficultyBetweenAsync(con, pool.Config.Id, miner, from, to, ct));
+	block.MinerEffort = await cf.Run(con => shareRepo.GetMinerShareDifficultyBetweenAsync(con, pool.Config.Id, miner, from, to, ct));
 
         if(block.MinerEffort.HasValue)
             block.MinerEffort = handler.AdjustBlockEffort(block.MinerEffort.Value);
 
 
     }
-	
+
     protected override async Task ExecuteAsync(CancellationToken ct)
     {
         try

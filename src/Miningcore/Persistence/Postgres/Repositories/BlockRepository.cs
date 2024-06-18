@@ -61,21 +61,6 @@ public class BlockRepository : IBlockRepository
             .ToArray();
     }
 
-    public async Task<Block[]> PageBlocksAsync(IDbConnection con, BlockStatus[] status, int page, int pageSize, CancellationToken ct)
-    {
-        const string query = @"SELECT * FROM blocks WHERE status = ANY(@status)
-            ORDER BY created DESC OFFSET @offset FETCH NEXT @pageSize ROWS ONLY";
-
-        return (await con.QueryAsync<Entities.Block>(new CommandDefinition(query, new
-        {
-            status = status.Select(x => x.ToString().ToLower()).ToArray(),
-            offset = page * pageSize,
-            pageSize
-        }, cancellationToken: ct)))
-            .Select(mapper.Map<Block>)
-            .ToArray();
-    }
-
     public async Task<Block[]> PageMinerBlocksAsync(IDbConnection con, string poolId, string address, BlockStatus[] status,
         int page, int pageSize, CancellationToken ct)
     {
@@ -86,6 +71,21 @@ public class BlockRepository : IBlockRepository
         {
             poolId,
 	    address,
+            status = status.Select(x => x.ToString().ToLower()).ToArray(),
+            offset = page * pageSize,
+            pageSize
+        }, cancellationToken: ct)))
+            .Select(mapper.Map<Block>)
+            .ToArray();
+    }
+
+    public async Task<Block[]> PageBlocksAsync(IDbConnection con, BlockStatus[] status, int page, int pageSize, CancellationToken ct)
+    {
+        const string query = @"SELECT * FROM blocks WHERE status = ANY(@status)
+            ORDER BY created DESC OFFSET @offset FETCH NEXT @pageSize ROWS ONLY";
+
+        return (await con.QueryAsync<Entities.Block>(new CommandDefinition(query, new
+        {
             status = status.Select(x => x.ToString().ToLower()).ToArray(),
             offset = page * pageSize,
             pageSize
@@ -118,6 +118,18 @@ public class BlockRepository : IBlockRepository
             .FirstOrDefault();
     }
     
+    public async Task<uint> GetBlockBeforeCountAsync(IDbConnection con, string poolId, BlockStatus[] status, DateTime before)
+    {
+        const string query = @"SELECT * FROM blocks WHERE poolid = @poolid AND status = ANY(@status) AND created < @before";
+        
+        return await con.ExecuteScalarAsync<uint>(new CommandDefinition(query, new
+        {
+            poolId,
+            status = status.Select(x => x.ToString().ToLower()).ToArray(),
+            before
+        }));
+    }
+
     public async Task<Block> GetMinerBlockBeforeAsync(IDbConnection con, string poolId, string miner, BlockStatus[] status, DateTime before)
     {
         const string query = @"SELECT * FROM blocks WHERE poolid = @poolid AND miner = @miner AND status = ANY(@status) AND created < @before
@@ -131,18 +143,6 @@ public class BlockRepository : IBlockRepository
         }))
             .Select(mapper.Map<Block>)
             .FirstOrDefault();
-    }
-
-    public async Task<uint> GetBlockBeforeCountAsync(IDbConnection con, string poolId, BlockStatus[] status, DateTime before)
-    {
-        const string query = @"SELECT * FROM blocks WHERE poolid = @poolid AND status = ANY(@status) AND created < @before";
-        
-        return await con.ExecuteScalarAsync<uint>(new CommandDefinition(query, new
-        {
-            poolId,
-            status = status.Select(x => x.ToString().ToLower()).ToArray(),
-            before
-        }));
     }
 
     public Task<uint> GetPoolBlockCountAsync(IDbConnection con, string poolId, CancellationToken ct)
@@ -159,17 +159,17 @@ public class BlockRepository : IBlockRepository
         return con.ExecuteScalarAsync<uint>(new CommandDefinition(query, new { poolId, address }, cancellationToken: ct));
     }
 
-    public Task<DateTime?> GetLastMinerBlockTimeAsync(IDbConnection con, string poolId, string address)
-    {
-        const string query = @"SELECT created FROM blocks WHERE poolid = @poolId AND miner = @address ORDER BY created DESC LIMIT 1";
-        return con.ExecuteScalarAsync<DateTime?>(query, new { poolId, address });
-    }
-	
     public Task<DateTime?> GetLastPoolBlockTimeAsync(IDbConnection con, string poolId)
     {
         const string query = @"SELECT created FROM blocks WHERE poolid = @poolId ORDER BY created DESC LIMIT 1";
 
         return con.ExecuteScalarAsync<DateTime?>(query, new { poolId });
+    }
+    
+    public Task<DateTime?> GetLastMinerBlockTimeAsync(IDbConnection con, string poolId, string address)
+    {
+        const string query = @"SELECT created FROM blocks WHERE poolid = @poolId AND miner = @address ORDER BY created DESC LIMIT 1";
+        return con.ExecuteScalarAsync<DateTime?>(query, new { poolId, address });
     }
     
     public async Task<Block> GetBlockByPoolHeightAndTypeAsync(IDbConnection con, string poolId, long height, string type)
