@@ -2810,6 +2810,32 @@
         "explorerTxLink": "https://explorer.shroudx.eu/tx/{0}",
         "explorerAccountLink": "https://explorer.shroudx.eu/address/{0}"
     },
+    "smartiecoin": {
+        "name": "SmartieCoin",
+        "canonicalName": "SmartieCoin",
+        "symbol": "SMT",
+        "family": "bitcoin",
+        "website": "https://smartiescoin.com/",
+        "market": "https://coinpaprika.com/coin/smt-smartiecoin",
+        "twitter": "https://twitter.com/SmartieCoin",
+        "telegram": "",
+        "discord": "https://discord.com/invite/XXKUqCzK8Q",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "yespower"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [ { "hash": "yespower" } ]
+        },
+        "hasMasterNodes": true,
+        "shareMultiplier": 65536,
+        "explorerBlockLink": "https://chainz.cryptoid.info/smartie/block.dws?$height$.htm",
+        "explorerTxLink": "https://chainz.cryptoid.info/smartie/tx.dws?{0}.htm",
+        "explorerAccountLink": "https://chainz.cryptoid.info/smartie/address.dws?{0}.htm"
+    },
     "smileycoin-sha256": {
         "name": "Smileycoin Sha256",
         "canonicalName": "Smileycoin",
