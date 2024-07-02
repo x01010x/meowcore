@@ -2571,6 +2571,37 @@
         "explorerTxLink": "https://mewc.cryptoscope.io/tx/?txid={0}",
         "explorerAccountLink": "https://mewc.cryptoscope.io/address/?address={0}"
     },
+    "joss": {
+        "name": "Joss Network",
+        "symbol": "JOSS",
+        "family": "bitcoin",
+        "website": "https://joss.network/",
+        "market": "",
+        "github": "https://github.com/jossnetwork/joss",
+        "twitter": "https://x.com/runonjoss",
+        "telegram": "",
+        "discord": "https://discord.gg/XPRMRfyXFA",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "allium"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "shareMultiplier": 256,
+        "explorerBlockLink": "https://explorer.joss.network/block/$hash$",
+        "explorerTxLink": "https://explorer.joss.network/tx/{0}",
+        "explorerAccountLink": "https://explorer.joss.network/address/{0}"
+    },
     "aipg": {
         "name": "AI Power Grid",
         "symbol": "AIPG",
