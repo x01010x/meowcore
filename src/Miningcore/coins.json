@@ -2666,6 +2666,40 @@
         "explorerTxLink": "https://explorer.joss.network/tx/{0}",
         "explorerAccountLink": "https://explorer.joss.network/address/{0}"
     },
+    "ultronai": {
+        "name": "UltronAI",
+        "canonicalName": "UltronAI",
+        "symbol": "UTO",
+        "family": "bitcoin",
+        "website": "https://ultronai.org/",
+        "market": "",
+        "github": "https://github.com/aidevpin",
+        "explorer": "http://explorer.fuertecoin.network:3001/",
+        "twitter": "https://x.com/ultronaiorg",
+        "telegram": "",
+        "discord": "https://discord.gg/hwmyvFKuNk",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "ghostrider"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+	"hasSmartNodes": true,
+        "shareMultiplier": 65536,
+        "explorerBlockLink": "http://explorer.ultronai.org/block/$hash$",
+        "explorerTxLink": "http://explorer.ultronai.org/tx/{0}",
+        "explorerAccountLink": "http://explorer.ultronai.org/address/{0}"
+    },
     "aipg": {
         "name": "AI Power Grid",
         "symbol": "AIPG",
