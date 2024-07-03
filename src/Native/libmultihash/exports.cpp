@@ -66,6 +66,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "shake/cshake.h"
 #include "shake/shake.h"
 #include "memehash.h"
+#include "megabtx.h"
 
 #ifdef _WIN32
 #include "blake2/ref/blake2.h"
@@ -449,5 +450,10 @@ extern "C" MODULE_API void aurum_export(const char *input, char *output, uint32_
 extern "C" MODULE_API void memehash_export(const char *input, char *output, uint32_t input_len)
 {
 	meme_hash(input, output, input_len);
+}
+
+extern "C" MODULE_API void megabtx_export(const char *input, char *output, uint32_t input_len)
+{
+	megabtx_hash(input, output, input_len);
 }
 
