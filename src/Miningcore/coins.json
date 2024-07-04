@@ -2661,6 +2661,7 @@
         },
         "hasFounderFee": true,
         "hasMasterNodes": true,
+        "hasSmartNodes": true,
         "shareMultiplier": 256,
         "explorerBlockLink": "https://explorer.joss.network/block/$hash$",
         "explorerTxLink": "https://explorer.joss.network/tx/{0}",
