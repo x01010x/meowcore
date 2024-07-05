@@ -91,7 +91,7 @@ static xmrig::cn_hash_fun get_cn_fn(const int algo) {
     case xmrig::Algorithm::CN_DOUBLE: return FNA(CN_DOUBLE);
     case xmrig::Algorithm::CN_CCX: return FNA(CN_CCX);
     case xmrig::Algorithm::GHOSTRIDER_RTM: return ghostrider;
-//    case xmrig::Algorithm::FLEX_KCN: return flex;
+    case xmrig::Algorithm::FLEX_KCN: return flex;
     default: return FN(CN_R);
     }
 }
