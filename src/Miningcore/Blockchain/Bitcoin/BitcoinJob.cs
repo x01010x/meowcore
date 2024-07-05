@@ -252,6 +252,9 @@ public class BitcoinJob
         if(coin.HasCommunityAddress)
             rewardToPool = CreateCommunityAddressOutputs(tx, rewardToPool);
 
+        if(coin.HasCoinbaseDevReward)
+            rewardToPool = CreateCoinbaseDevRewardOutputs(tx, rewardToPool);
+
         if(coin.HasFoundation)
             rewardToPool = CreateFoundationOutputs(tx, rewardToPool);
 
@@ -574,6 +577,32 @@ public class BitcoinJob
     }
     #endregion // CommunityAddres
 
+    #region CoinbaseDevReward
+
+    protected CoinbaseDevRewardTemplateExtra CoinbaseDevRewardParams;
+
+    protected virtual Money CreateCoinbaseDevRewardOutputs(Transaction tx, Money reward)
+    {
+        if(CoinbaseDevRewardParams.CoinbaseDevReward != null)
+        {
+            CoinbaseDevReward[] CBRewards;
+            CBRewards = new[] { CoinbaseDevRewardParams.CoinbaseDevReward.ToObject<CoinbaseDevReward>() };
+
+            foreach(var CBReward in CBRewards)
+            {
+                if(!string.IsNullOrEmpty(CBReward.ScriptPubkey))
+                {
+                    Script payeeAddress = new (CBReward.ScriptPubkey.HexToByteArray());
+                    var payeeReward = CBReward.Value;
+                    tx.Outputs.Add(payeeReward, payeeAddress);
+                }
+            }
+        }
+        return reward;
+    }
+
+    #endregion // CoinbaseDevReward
+
     #region Foundation
 
     protected FoundationBlockTemplateExtra foundationParameters;
@@ -683,6 +712,9 @@ public class BitcoinJob
 
         if (coin.HasMinerFund)
             minerFundParameters = BlockTemplate.Extra.SafeExtensionDataAs<MinerFundTemplateExtra>("coinbasetxn", "minerfund");
+
+		if(coin.HasCoinbaseDevReward)
+            CoinbaseDevRewardParams = BlockTemplate.Extra.SafeExtensionDataAs<CoinbaseDevRewardTemplateExtra>();
 
 		if(coin.HasFoundation)
             foundationParameters = BlockTemplate.Extra.SafeExtensionDataAs<FoundationBlockTemplateExtra>();
