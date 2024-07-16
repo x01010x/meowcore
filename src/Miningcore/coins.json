@@ -36,6 +36,32 @@
         "explorerTxLink": "https://explorer.fiveg.cash/tx/{0}",
         "explorerAccountLink": "https://explorer.fiveg.cash/address/{0}"
     },
+    "anonpay": {
+        "name": "AnonPay",
+        "symbol": "ANP",
+        "family": "bitcoin",
+        "website": "https://anonpay.net/",
+        "market": "https://xeggex.com/market/ANP_USDT",
+        "twitter": "https://twitter.com/AnonPayOfficial",
+        "discord": "https://discord.com/invite/eKN8aHXkwK",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "keccakc"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [ { "hash": "sha256d" } ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "shareMultiplier": 256,
+        "explorerBlockLink": "https://explorer.anonpay.net/block/$height$",
+        "explorerTxLink": "https://explorer.anonpay.net/tx/{0}",
+        "explorerAccountLink": "https://explorer.anonpay.net/address/{0}"
+    },
     "auroracoin-sha256": {
         "name": "Auroracoin Sha256",
         "canonicalName": "Auroracoin",
