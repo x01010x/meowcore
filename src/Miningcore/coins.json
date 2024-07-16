@@ -5432,6 +5432,32 @@
         "explorerTxLink": "https://explorer.kobradag.online/txs/{0}",
         "explorerAccountLink": "https://explorer.kobradag.online/addresses/{0}"
     },
+    "nvolve": {
+        "name": "Nvolve",
+        "symbol": "NVOL",
+        "family": "bitcoin",
+        "website": "https://nvolve.tech/",
+        "market": "https://xeggex.com/market/NVOL_USDT",
+        "twitter": "",
+        "discord": "https://discord.com/invite/NjRWrEvvV5",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "keccakc"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [ { "hash": "sha256d" } ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "shareMultiplier": 256,
+        "explorerBlockLink": "https://explorer.nvolve.tech/block/$height$",
+        "explorerTxLink": "https://explorer.nvolve.tech/tx/{0}",
+        "explorerAccountLink": "https://explorer.nvolve.tech/address/{0}"
+    },
     "kylacoin": {
         "name": "Kylacoin",
         "symbol": "KCN",
