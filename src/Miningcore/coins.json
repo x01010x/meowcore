@@ -1541,6 +1541,38 @@
         "explorerTxLink": "http://hfrco.in/blockcrawler/tx/{0}",
         "explorerAccountLink": "http://hfrco.in/blockcrawler/address/{0}"
     },
+    "hootchain": {
+        "name": "HootChain",
+        "canonicalName": "HootChain",
+        "symbol": "HOOT",
+        "family": "bitcoin",
+        "website": "https://www.hootchain.org/",
+        "market": "",
+        "twitter": "https://x.com/HootChain",
+        "telegram": "https://t.me/HootChain",
+        "discord": "https://discord.gg/WEPECmANVy",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "x11"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "x11"
+                }
+            ]
+        },
+        "hasMasterNodes": true,
+        "hasFounderFee": true,
+        "hasDevFee": true,
+        "coinbaseMinConfimations": 150,
+        "explorerBlockLink": "https://explorer.hootchain.org/block/$hash$",
+        "explorerTxLink": "https://explorer.hootchain.org/tx/{0}",
+        "explorerAccountLink": "https://explorer.hootchain.org/address/{0}"
+    },
     "indexchain": {
         "name": "IndexChain",
         "symbol": "IDX",
