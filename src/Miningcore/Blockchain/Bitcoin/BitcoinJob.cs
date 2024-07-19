@@ -469,12 +469,12 @@ public class BitcoinJob
             {
                 foreach(var masterNode in masternodes)
                 {
-                    if(!string.IsNullOrEmpty(masterNode.Payee))
+                    if(!string.IsNullOrEmpty(masterNode.Script))
                     {
-                        var payeeDestination = BitcoinUtils.AddressToDestination(masterNode.Payee, network);
+                        Script payeeAddress = new (masterNode.Script.HexToByteArray());
                         var payeeReward = masterNode.Amount;
 
-                        tx.Outputs.Add(payeeReward, payeeDestination);
+                        tx.Outputs.Add(payeeReward, payeeAddress);
                         reward -= payeeReward;
                     }
                 }
@@ -525,9 +525,9 @@ public class BitcoinJob
             {
                 foreach(var Founder in founders)
                 {
-                    if(!string.IsNullOrEmpty(Founder.Payee))
+                    if(!string.IsNullOrEmpty(Founder.Script))
                     {
-                        var payeeAddress = BitcoinUtils.AddressToDestination(Founder.Payee, network);
+                        Script payeeAddress = new (Founder.Script.HexToByteArray());
                         var payeeReward = Founder.Amount;
 
                         tx.Outputs.Add(payeeReward, payeeAddress);
@@ -708,15 +708,24 @@ public class BitcoinJob
             payeeParameters = BlockTemplate.Extra.SafeExtensionDataAs<PayeeBlockTemplateExtra>();
 
         if (coin.HasFounderFee)
+	{
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
 
+            if(coin.HasDevFee)
+            {
+                if(founderParameters.Extra?.ContainsKey("devfee") == true)
+                {
+                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["devfee"]);
+                }
+            }
+	}
         if (coin.HasMinerFund)
             minerFundParameters = BlockTemplate.Extra.SafeExtensionDataAs<MinerFundTemplateExtra>("coinbasetxn", "minerfund");
 
-		if(coin.HasCoinbaseDevReward)
+	if(coin.HasCoinbaseDevReward)
             CoinbaseDevRewardParams = BlockTemplate.Extra.SafeExtensionDataAs<CoinbaseDevRewardTemplateExtra>();
 
-		if(coin.HasFoundation)
+	if(coin.HasFoundation)
             foundationParameters = BlockTemplate.Extra.SafeExtensionDataAs<FoundationBlockTemplateExtra>();
 
         this.coinbaseHasher = coinbaseHasher;
