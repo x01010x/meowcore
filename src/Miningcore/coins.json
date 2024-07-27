@@ -3254,7 +3254,8 @@
         "name": "StakeCube",
         "canonicalName": "Stakecube",
         "symbol": "SCC",
-        "family": "bitcoin",
+        "family": "progpow",
+        "progpower": "sccpow",
         "website": "https://stakecube.net/",
         "market": "https://coinmarketcap.com/currencies/stakecubecoin",
         "twitter": "https://twitter.com/stakecube",
@@ -3264,17 +3265,18 @@
             "hash": "sha256d"
         },
         "headerHasher": {
-            "hash": "x11"
+            "hash": "sha256d"
         },
         "blockHasher": {
             "hash": "reverse",
             "args": [
                 {
-                    "hash": "x11"
+                    "hash": "sha256d"
                 }
             ]
         },
         "hasMasterNodes": true,
+        "shareMultiplier": 1,
         "explorerBlockLink": "https://scc.ccore.online/block/$height$",
         "explorerTxLink": "https://scc.ccore.online/tx/{0}",
         "explorerAccountLink": "https://scc.ccore.online/address/{0}"
