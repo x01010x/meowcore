@@ -1638,6 +1638,32 @@
         "explorerTxLink": "http://157.245.248.32:3000/#/tx/{0}",
         "explorerAccountLink": "http://157.245.248.32:3000/#/address/{0}"
     },
+    "keymaker": {
+        "name": "Keymaker",
+        "symbol": "KEYM",
+        "family": "bitcoin",
+        "website": "https://www.keymaker.cc/",
+        "market": "",
+        "twitter": "https://twitter.com/keymakercc",
+        "discord": "https://discord.gg/hEejbJG5uw",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "ghostrider"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [ { "hash": "sha256d" } ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "shareMultiplier": 65536,
+        "explorerBlockLink": "https://explorer.keymaker.cc/block/$height$",
+        "explorerTxLink": "https://explorer.keymaker.cc/tx/{0}",
+        "explorerAccountLink": "https://explorer.keymaker.cc/address/{0}"
+    },
     "lanacoin": {
         "name": "Lanacoin",
         "canonicalName": "Lana",
