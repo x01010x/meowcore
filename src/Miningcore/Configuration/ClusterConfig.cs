@@ -231,6 +231,9 @@ public partial class BitcoinTemplate : CoinTemplate
     public bool HasDevFee { get; set; }
 
     [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasMinerDevFund { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
     public bool HasMinerFund { get; set; }
 
     [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
