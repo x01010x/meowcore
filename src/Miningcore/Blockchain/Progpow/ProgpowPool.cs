@@ -47,6 +47,7 @@ public class ProgpowPool : PoolBase
         switch(coin.Symbol)
         {
             case "FIRO":
+            case "KIIRO":
                 return ProgpowUtils.FiroEncodeTarget(difficulty);
             
             default:
@@ -300,6 +301,7 @@ public class ProgpowPool : PoolBase
         switch(coin.Symbol)
         {
             case "FIRO":
+            case "KIIRO":
                 return ctx.Resolve<ProgpowJobManager>(new TypedParameter(typeof(IExtraNonceProvider), new FiroExtraNonceProvider(poolConfig.Id, clusterConfig.InstanceId)));
             
             default:
