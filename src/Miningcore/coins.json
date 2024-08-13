@@ -5549,6 +5549,36 @@
         "explorerTxLink": "https://explorer.kobradag.online/txs/{0}",
         "explorerAccountLink": "https://explorer.kobradag.online/addresses/{0}"
     },
+    "consensus": {
+        "name": "Consensus",
+        "canonicalName": "Consensus",
+        "symbol": "CSS",
+        "family": "kaspa",
+        "website": "https://consensus-network.com/",
+        "github": "https://github.com/consensus-network/consensusd",
+        "market": "",
+        "twitter": "https://twitter.com/Consensus_CSS",
+        "telegram": "https://t.me/consensus_network",
+        "discord": "",
+        "explorerBlockLink": "https://explorer.consensus-network.com/blocks/$hash$",
+        "explorerTxLink": "https://explorer.consensus-network.com/txs/{0}",
+        "explorerAccountLink": "https://explorer.consensus-network.com/addresses/{0}"
+    },
+    "pugdag": {
+        "name": "Pugdag",
+        "canonicalName": "Pugdag",
+        "symbol": "PUG",
+        "family": "kaspa",
+        "website": "https://pugdag.com/",
+        "github": "https://github.com/Pugdag/pugdagd",
+        "market": "https://xeggex.com/market/PUG_USDT?ref=660c7f77a13a5706f612bbc8",
+        "twitter": "https://twitter.com/pug_dag",
+        "telegram": "https://t.me/pug_dag",
+        "discord": "https://discord.com/invite/pugdag",
+        "explorerBlockLink": "https://explorer.pugdag.com/blocks/$hash$",
+        "explorerTxLink": "https://explorer.pugdag.com/txs/{0}",
+        "explorerAccountLink": "https://explorer.pugdag.com/addresses/{0}"
+    },
     "nvolve": {
         "name": "Nvolve",
         "symbol": "NVOL",
