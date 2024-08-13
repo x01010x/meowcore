@@ -2943,32 +2943,6 @@
         "explorerTxLink": "https://explorer.pulsarcoin.org/tx/{0}",
         "explorerAccountLink": "https://explorer.pulsarcoin.org/address/{0}"
     },
-    "vishai": {
-        "name": "Vishai",
-        "canonicalName": "VishAI",
-        "symbol": "VISH",
-        "family": "bitcoin",
-        "website": "https://vishcoin.com/",
-        "market": "",
-        "twitter": "https://twitter.com/vishcoinai",
-        "telegram": "https://t.me/vishaiofficial",
-        "discord": "https://discord.gg/cxCfHuNpWn",
-        "coinbaseHasher": {
-            "hash": "sha256d"
-        },
-        "headerHasher": {
-            "hash": "yespower"
-        },
-        "blockHasher": {
-            "hash": "reverse",
-            "args": [ { "hash": "yespower" } ]
-        },
-        "hasMasterNodes": true,
-        "shareMultiplier": 65536,
-        "explorerBlockLink": "https://explorer.vishcoin.com/block/$hash$",
-        "explorerTxLink": "https://explorer.vishcoin.com/tx/{0}",
-        "explorerAccountLink": "https://explorer.vishcoin.com/address/{0}"
-    },
     "magpiecoin": {
         "name": "MagPieCoin",
         "canonicalName": "MagPieCoin",
@@ -3947,28 +3921,24 @@
         "explorerAccountLink": "https://chainz.cryptoid.info/via/address.dws?{0}.htm"
     },
     "vishai": {
-        "name": "VishAiCoin",
+        "name": "Vishai",
+        "canonicalName": "VishAI",
         "symbol": "VISH",
         "family": "bitcoin",
         "website": "https://vishcoin.com/",
+        "market": "",
         "twitter": "https://twitter.com/vishcoinai",
         "telegram": "https://t.me/vishaiofficial",
-        "github": "https://github.com/vishcoin/vishai",
-        "explorer": "https://explorer.vishcoin.com",
-        "discord": "https://discord.com/invite/cxCfHuNpWn",
+        "discord": "https://discord.gg/cxCfHuNpWn",
         "coinbaseHasher": {
             "hash": "sha256d"
         },
         "headerHasher": {
-            "hash": "yespower",
+            "hash": "yespower"
         },
         "blockHasher": {
             "hash": "reverse",
-            "args": [
-				{
-					"hash": "yespower"
-				}
-			]
+            "args": [ { "hash": "yespower" } ]
         },
         "hasMasterNodes": true,
         "shareMultiplier": 65536,
