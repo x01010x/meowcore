@@ -211,7 +211,7 @@ public class ProgpowJob : BitcoinJob
         {
             masterNodeParameters = BlockTemplate.Extra.SafeExtensionDataAs<MasterNodeBlockTemplateExtra>();
 
-            if(coin.Symbol == "FIRO")
+            if(coin.Symbol == "FIRO" || coin.Symbol == "KIIRO")
             {
                 if(masterNodeParameters.Extra?.ContainsKey("znode") == true)
                 {
@@ -231,7 +231,32 @@ public class ProgpowJob : BitcoinJob
             payeeParameters = BlockTemplate.Extra.SafeExtensionDataAs<PayeeBlockTemplateExtra>();
 
         if (coin.HasFounderFee)
+	{
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
+            if(coin.HasCommunity)
+            {
+                if(founderParameters.Extra?.ContainsKey("community") == true)
+                {
+                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["community"]);
+                }
+            }
+
+            if(coin.HasDeveloper)
+            {
+                if(founderParameters.Extra?.ContainsKey("developer") == true)
+                {
+                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["developer"]);
+                }
+            }
+
+            if(coin.HasDataMining)
+            {
+                if(founderParameters.Extra?.ContainsKey("datamining") == true)
+                {
+                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["datamining"]);
+                }
+            }
+	}
 
         if (coin.HasMinerDevFund)
             minerDevFundParameters = BlockTemplate.Extra.SafeExtensionDataAs<MinerDevFundTemplateExtra>("coinbasetxn", "minerdevfund");

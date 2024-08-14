@@ -2682,6 +2682,9 @@
             ]
         },
         "hasFounderFee": true,
+        "hasCommunity": true,
+        "hasDeveloper": true,
+        "hasDataMining": true,
         "hasMasterNodes": true,
         "shareMultiplier": 1,
         "progpower": "firopow",

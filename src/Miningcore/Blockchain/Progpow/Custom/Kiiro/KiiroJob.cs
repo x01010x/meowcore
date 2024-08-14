@@ -158,19 +158,15 @@ public class KiiroJob : ProgpowJob
 
     protected override Money CreateFounderOutputs(Transaction tx, Money reward)
     {
-        if (coin.HasFounderFee)
+        if (founderParameters.Founder != null)
         {
             Founder[] founders;
             
-            if(network.Name.ToLower() == "testnet")
-            {
-                founders = new[] { new Founder{ Payee = "TCkC4uoErEyCB4MK3d6ouyJELoXnuyqe9L", Amount = 300000000 }, new Founder{ Payee = "TWDxLLKsFp6qcV1LL4U2uNmW4HwMcapmMU", Amount = 450000000 } };
-            }
+            if (founderParameters.Founder.Type == JTokenType.Array)
+                founders = founderParameters.Founder.ToObject<Founder[]>();
             else
-            {
-                founders = new[] { new Founder{ Payee = "KDW8CeScVpWFzekvZm4f37qs5GxByEGSKE", Amount = 300000000 }, new Founder{ Payee = "KWTco92wURX5Jwu3mMdWrs36j574meAvew", Amount = 300000000 } };
-            }
-            
+                founders = new[] { founderParameters.Founder.ToObject<Founder>() };
+
             foreach(var Founder in founders)
             {
                 if(!string.IsNullOrEmpty(Founder.Payee))
@@ -179,14 +175,6 @@ public class KiiroJob : ProgpowJob
                     var payeeReward = Founder.Amount;
 
                     tx.Outputs.Add(payeeReward, payeeAddress);
-                    
-                    /*  A block reward of 30 KIIRO/block is divided as follows:
-                    
-                            Miners (20%, 6 KIIRO)
-                            Masternodes (60%, 18 KIIRO)
-                            Development Fund (10%, 3 KIIRO)
-                            Community Fund (10%, 3 KIIRO)
-                    */
                     //reward -= payeeReward; // KIIRO does not deduct payeeReward from coinbasevalue (reward) since it's the amount which goes to miners
                 }
             }
