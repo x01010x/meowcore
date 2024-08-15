@@ -162,20 +162,21 @@ public class KiiroJob : ProgpowJob
         if (founderParameters.Founder != null)
         {
             Founder[] founders;
-            
             if (founderParameters.Founder.Type == JTokenType.Array)
                 founders = founderParameters.Founder.ToObject<Founder[]>();
             else
                 founders = new[] { founderParameters.Founder.ToObject<Founder>() };
 
-            foreach(var Founder in founders)
+            if(founders != null)
             {
-                if(!string.IsNullOrEmpty(Founder.Payee))
+                foreach(var Founder in founders)
                 {
-                    var payeeAddress = BitcoinUtils.AddressToDestination(Founder.Payee, network);
-                    var payeeReward = Founder.Amount;
+                    if(!string.IsNullOrEmpty(Founder.Script))
+                    {
+                        Script payeeAddress = new (Founder.Script.HexToByteArray());
+                        var payeeReward = Founder.Amount;
 
-                    tx.Outputs.Add(payeeReward, payeeAddress);
+                        tx.Outputs.Add(payeeReward, payeeAddress);
                     /*  A block reward of 30 KIIRO/block is divided as follows:
                     
                             Miners (20%, 6 KIIRO)
@@ -184,7 +185,8 @@ public class KiiroJob : ProgpowJob
                             Developer Fund (9%, 2.7 KIIRO)
                             Community Fund (9%, 2.7 KIIRO)
                     */
-                    //reward -= payeeReward; // KIIRO does not deduct payeeReward from coinbasevalue (reward) since it's the amount which goes to miners
+	                //reward -= payeeReward; // KIIRO does not deduct payeeReward from coinbasevalue (reward) since it's the amount which goes to miners
+                    }
                 }
             }
         }
