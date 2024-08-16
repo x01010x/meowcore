@@ -195,4 +195,46 @@ public class KiiroJob : ProgpowJob
     }
 
     #endregion // Founder
+
+    #region DataMining
+
+    protected override Money CreateDataMiningOutputs(Transaction tx, Money reward)
+    {
+        if (dataminingParameters.DataMining != null)
+        {
+            DataMining[] dataminings;
+            if (dataminingParameters.DataMining.Type == JTokenType.Array)
+                dataminings = dataminingParameters.DataMining.ToObject<DataMining[]>();
+            else
+                dataminings = new[] { dataminingParameters.DataMining.ToObject<DataMining>() };
+
+            if(dataminings != null)
+            {
+                foreach(var DataMining in dataminings)
+                {
+                    if(!string.IsNullOrEmpty(DataMining.Script))
+                    {
+                        Script payeeAddress = new (DataMining.Script.HexToByteArray());
+                        var payeeReward = DataMining.Amount;
+
+                        tx.Outputs.Add(payeeReward, payeeAddress);
+                    /*  A block reward of 30 KIIRO/block is divided as follows:
+                    
+                            Miners (20%, 6 KIIRO)
+                            Masternodes (61%, 18.3 KIIRO)
+                            DataMining Fund (1%, 0.3 KIIRO)
+                            Developer Fund (9%, 2.7 KIIRO)
+                            Community Fund (9%, 2.7 KIIRO)
+                    */
+	                //reward -= payeeReward; // KIIRO does not deduct payeeReward from coinbasevalue (reward) since it's the amount which goes to miners
+                    }
+                }
+            }
+        }
+
+        return reward;
+    }
+
+    #endregion //DataMining
+
 }

@@ -230,6 +230,9 @@ public class ProgpowJob : BitcoinJob
         if(coin.HasPayee)
             payeeParameters = BlockTemplate.Extra.SafeExtensionDataAs<PayeeBlockTemplateExtra>();
 
+        if(coin.HasDataMining)
+            dataminingParameters = BlockTemplate.Extra.SafeExtensionDataAs<DataMiningBlockTemplateExtra>();
+
         if (coin.HasFounderFee)
 	{
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
@@ -246,14 +249,6 @@ public class ProgpowJob : BitcoinJob
                 if(founderParameters.Extra?.ContainsKey("developer") == true)
                 {
                     founderParameters.Founder = JToken.FromObject(founderParameters.Extra["developer"]);
-                }
-            }
-
-            if(coin.HasDataMining)
-            {
-                if(founderParameters.Extra?.ContainsKey("datamining") == true)
-                {
-                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["datamining"]);
                 }
             }
 	}
