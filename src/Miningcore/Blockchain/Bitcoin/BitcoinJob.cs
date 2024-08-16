@@ -264,6 +264,9 @@ public class BitcoinJob
         if(coin.HasDataMining)
             rewardToPool = CreateDataMiningOutputs(tx, rewardToPool);
 
+        if(coin.HasCommunity)
+            rewardToPool = CreateCommunityOutputs(tx, rewardToPool);
+
         // Remaining amount goes to pool
         tx.Outputs.Add(rewardToPool, poolAddressDestination);
 
@@ -512,6 +515,41 @@ public class BitcoinJob
     }
 
     #endregion // Masternodes
+
+    #region Community
+
+    protected CommunityBlockTemplateExtra communityParameters;
+
+    protected virtual Money CreateCommunityOutputs(Transaction tx, Money reward)
+    {
+        if (communityParameters.Community != null)
+        {
+            Community[] communitys;
+            if (communityParameters.Community.Type == JTokenType.Array)
+                communitys = communityParameters.Community.ToObject<Community[]>();
+            else
+                communitys = new[] { communityParameters.Community.ToObject<Community>() };
+
+            if(communitys != null)
+            {
+                foreach(var Community in communitys)
+                {
+                    if(!string.IsNullOrEmpty(Community.Script))
+                    {
+                        Script payeeAddress = new (Community.Script.HexToByteArray());
+                        var payeeReward = Community.Amount;
+
+                        tx.Outputs.Add(payeeReward, payeeAddress);
+                        reward -= payeeReward;
+                    }
+                }
+            }
+        }
+
+        return reward;
+    }
+
+    #endregion //Community
 
     #region DataMining
 
@@ -771,6 +809,9 @@ public class BitcoinJob
         if(coin.HasPayee)
             payeeParameters = BlockTemplate.Extra.SafeExtensionDataAs<PayeeBlockTemplateExtra>();
 
+        if(coin.HasCommunity)
+            communityParameters = BlockTemplate.Extra.SafeExtensionDataAs<CommunityBlockTemplateExtra>();
+
         if(coin.HasDataMining)
             dataminingParameters = BlockTemplate.Extra.SafeExtensionDataAs<DataMiningBlockTemplateExtra>();
 
@@ -783,14 +824,6 @@ public class BitcoinJob
                 if(founderParameters.Extra?.ContainsKey("devfee") == true)
                 {
                     founderParameters.Founder = JToken.FromObject(founderParameters.Extra["devfee"]);
-                }
-            }
-
-            if(coin.HasCommunity)
-            {
-                if(founderParameters.Extra?.ContainsKey("community") == true)
-                {
-                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["community"]);
                 }
             }
 
