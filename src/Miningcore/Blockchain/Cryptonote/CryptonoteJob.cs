@@ -213,6 +213,10 @@ public class CryptonoteJob
             // Not all Cryptonote coins are equal
             if(blobType == ZephyrConstants.BlobType)
                 CryptonoteBindings.GetBlockId(blob, blockHash, blobType);
+
+            else if(blobType == EquilibriaConstants.EquilibriaBlobType)
+                CryptonoteBindings.GetBlockId(blob, blockHash, blobType);
+
             else
                 ComputeBlockHash(blobConverted, blockHash);
 
