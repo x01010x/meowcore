@@ -461,7 +461,7 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
                             decimal EquilibriaMiningReward = EquilibriaConstants.EquilibriaMiningRewardInitial;
                             decimal EquilibriaReserveReward = EquilibriaConstants.EquilibriaReserveRewardInitial;
                             
-                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit) / (1m - EquilibriaReserveReward)) * EquilibriaMiningReward) * coin.BlockrewardMultiplier;
+                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) * EquilibriaMiningReward) * coin.BlockrewardMultiplier;
                             break;
 
                         default:
