@@ -2620,6 +2620,39 @@
         "explorerTxLink": "https://ravencoin.network/rvn/transaction/{0}",
         "explorerAccountLink": "https://ravencoin.network/rvn/address/{0}"
     },
+    "ravencash": {
+        "name": "Ravencash",
+        "symbol": "RVH",
+        "family": "progpow",
+        "progpower": "kawpow",
+        "website": "https://ravencash.net/",
+		"github": "https://github.com/ravencash-net/ravencash",
+        "market": "",
+        "twitter": "https://x.com/ravencash_net",
+        "telegram": "",
+        "discord": "https://discord.com/invite/NVwcw3P2FF",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "sha256d"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "shareMultiplier": 1,
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+		"hasSmartNodes": true,
+        "explorerBlockLink": "https://explorer.ravencash.net/block/$hash$",
+        "explorerTxLink": "https://explorer.ravencash.net/tx/{0}",
+        "explorerAccountLink": "https://explorer.ravencash.net/address/{0}"
+    },
     "firo": {
         "name": "Firo",
         "symbol": "FIRO",
