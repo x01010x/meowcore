@@ -69,7 +69,7 @@ public abstract class PoolBase : StratumServer,
     protected static readonly TimeSpan maxShareAge = TimeSpan.FromSeconds(6);
     protected static readonly TimeSpan loginFailureBanTimeout = TimeSpan.FromSeconds(10);
     protected static readonly Regex regexStaticDiff = new(@";?d=(\d*(\.\d+)?)", RegexOptions.Compiled);
-    protected static readonly Regex regexStartDiff = new(@";?sd=(\sd*(\.\sd+)?)", RegexOptions.Compiled);
+    protected static readonly Regex regexStartDiff = new(@";?sd=(\d*(\.\d+)?)", RegexOptions.Compiled);
     protected const string PasswordControlVarsSeparator = ";";
 
     protected abstract Task SetupJobManager(CancellationToken ct);
