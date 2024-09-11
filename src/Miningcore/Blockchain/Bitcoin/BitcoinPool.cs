@@ -121,10 +121,10 @@ public class BitcoinPool : PoolBase
             var staticDiff = GetStaticDiffFromPassparts(passParts);
             var startDiff = GetStartDiffFromPassparts(passParts);
 
-			// Static diff
-			if (startDiff.HasValue)
+			// Start diff
+			if(startDiff.HasValue)
 			{
-				if(!staticDiff.HasValue && (context.VarDiff != null && startDiff.Value >= context.VarDiff.Config.MinDiff || context.VarDiff == null && startDiff.Value > context.Difficulty))
+				if(context.VarDiff != null && startDiff.Value >= context.VarDiff.Config.MinDiff || context.VarDiff == null && startDiff.Value > context.Difficulty)
 				{
 					context.SetDifficulty(startDiff.Value);
 					logger.Info(() => $"[{connection.ConnectionId}] Start difficulty set to {startDiff.Value}");
@@ -136,16 +136,18 @@ public class BitcoinPool : PoolBase
 				}
 			}
 			
-			// Start diff
-			if (staticDiff.HasValue)
+			// Static diff
+			if(staticDiff.HasValue && !startDiff.HasValue)
 			{
-				if(!startDiff.HasValue && (context.VarDiff != null && staticDiff.Value >= context.VarDiff.Config.MinDiff || context.VarDiff == null && staticDiff.Value > context.Difficulty))
+				if(context.VarDiff != null && staticDiff.Value >= context.VarDiff.Config.MinDiff || context.VarDiff == null && staticDiff.Value > context.Difficulty)
 				{
+					context.VarDiff = null; // disable vardiff
 					context.SetDifficulty(staticDiff.Value);
-					logger.Info(() => $"[{connection.ConnectionId}] Setting static difficulty of {startDiff.Value}");
+					logger.Info(() => $"[{connection.ConnectionId}] Setting static difficulty of {staticDiff.Value}");
 				}
 				else
 				{
+					context.VarDiff = null; // disable vardiff
 					context.SetDifficulty(context.VarDiff.Config.MinDiff);
 					logger.Info(() => $"[{connection.ConnectionId}] Setting static difficulty of {context.VarDiff.Config.MinDiff}");
 				}
