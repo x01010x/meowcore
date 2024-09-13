@@ -464,6 +464,12 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
                             block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) * EquilibriaMiningReward) * coin.BlockrewardMultiplier;
                             break;
 
+                        case "MRL":
+                            decimal MoreloReserveReward = MoreloConstants.MoreloReserveRewardInitial;
+                            
+                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) - MoreloReserveReward) * coin.BlockrewardMultiplier;
+                            break;
+
                         default:
                             block.Reward = (blockHeader.Reward / coin.SmallestUnit) * coin.BlockrewardMultiplier;
                             break;
