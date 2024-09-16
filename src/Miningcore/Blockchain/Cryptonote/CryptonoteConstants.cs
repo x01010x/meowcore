@@ -44,7 +44,7 @@ public static class CryptonoteConstants
 
 public static class MoreloConstants
 {
-    public const decimal MoreloReserveRewardInitial = 5.55m; // MiningReward = BlockReward - ReserveReward 
+    public const decimal MoreloReserveRewardInitial = 5.555m; // MiningReward = BlockReward - ReserveReward 
 }
 
 public static class EquilibriaConstants
