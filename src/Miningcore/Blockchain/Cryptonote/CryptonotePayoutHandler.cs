@@ -491,7 +491,10 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         var blockRewardRemaining = await base.UpdateBlockRewardBalancesAsync(con, tx, pool, block, ct);
 
         // Deduct static reserve for tx fees
-        blockRewardRemaining -= CryptonoteConstants.StaticTransactionFeeReserve;
+		var coin = poolConfig.Template.As<CryptonoteCoinTemplate>();
+		var StaticTransactionFeeReserve = (coin.Symbol == "MRL") ? MoreloConstants.MoreloStaticTransactionFeeReserve : CryptonoteConstants.StaticTransactionFeeReserve;
+
+        blockRewardRemaining -= StaticTransactionFeeReserve;
 
         return blockRewardRemaining;
     }
