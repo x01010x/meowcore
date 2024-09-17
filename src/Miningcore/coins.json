@@ -1055,6 +1055,33 @@
         "explorerTxLink": "https://chainz.cryptoid.info/dem/tx.dws?{0}.htm",
         "explorerAccountLink": "https://chainz.cryptoid.info/dem/address.dws?{0}.htm"
     },
+    "enig": {
+        "name": "Enig",
+        "symbol": "ENIG",
+        "family": "bitcoin",
+        "website": "https://enigplay.com/",
+        "github": "https://github.com/enigplay/enig",
+        "market": "",
+        "twitter": "https://x.com/weareenig",
+        "discord": "https://discord.gg/cf3sPZxmXH",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "ghostrider"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [ { "hash": "sha256d" } ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "shareMultiplier": 65536,
+        "explorerBlockLink": "https://enigscan.com/block/$height$",
+        "explorerTxLink": "https://enigscan.com/tx/{0}",
+        "explorerAccountLink": "https://enigscan.com/address/{0}"
+    }
     "emrals": {
         "name": "Emrals",
         "canonicalName": "Emrals",
