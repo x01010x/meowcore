@@ -1081,7 +1081,7 @@
         "explorerBlockLink": "https://enigscan.com/block/$height$",
         "explorerTxLink": "https://enigscan.com/tx/{0}",
         "explorerAccountLink": "https://enigscan.com/address/{0}"
-    }
+    },
     "emrals": {
         "name": "Emrals",
         "canonicalName": "Emrals",
