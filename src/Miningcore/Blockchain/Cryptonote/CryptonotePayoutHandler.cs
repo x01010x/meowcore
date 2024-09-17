@@ -52,7 +52,8 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
     private CryptonoteNetworkType? networkType;
     private CryptonotePoolPaymentProcessingConfigExtra extraConfig;
     private bool walletSupportsTransferSplit;
-
+    private int PayoutMinBlockConfirmations;
+    
     protected override string LogCategory => "Cryptonote Payout Handler";
 
     private async Task<bool> HandleTransferResponseAsync(RpcResponse<TransferResponse> response, params Balance[] balances)
@@ -326,6 +327,9 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         clusterConfig = cc;
         extraConfig = pc.PaymentProcessing.Extra.SafeExtensionDataAs<CryptonotePoolPaymentProcessingConfigExtra>();
 
+	var coin = poolConfig.Template.As<CryptonoteCoinTemplate>();
+	int PayoutMinBlockConfirmations = coin.CoinbaseMinConfimations ?? CryptonoteConstants.PayoutMinBlockConfirmations;
+
         logger = LogUtil.GetPoolScopedLogger(typeof(CryptonotePayoutHandler), pc);
 
         // configure standard daemon
@@ -411,7 +415,8 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
                 var blockHeader = rpcResult.Response.BlockHeader;
 
                 // update progress
-                block.ConfirmationProgress = Math.Min(1.0d, (double) blockHeader.Depth / CryptonoteConstants.PayoutMinBlockConfirmations);
+		//var PayoutMinBlockConfirmations = (coin.Symbol == "MRL") ? MoreloConstants.MoreloMinBlockConfirmations : CryptonoteConstants.PayoutMinBlockConfirmations;
+                block.ConfirmationProgress = Math.Min(1.0d, (double) blockHeader.Depth / PayoutMinBlockConfirmations);
                 result.Add(block);
 
                 messageBus.NotifyBlockConfirmationProgress(poolConfig.Id, block, coin);
@@ -427,7 +432,7 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
                 }
 
                 // matured and spendable?
-                if(blockHeader.Depth >= CryptonoteConstants.PayoutMinBlockConfirmations)
+                if(blockHeader.Depth >= PayoutMinBlockConfirmations)
                 {
                     block.Status = BlockStatus.Confirmed;
                     block.ConfirmationProgress = 1;
@@ -490,9 +495,9 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
     {
         var blockRewardRemaining = await base.UpdateBlockRewardBalancesAsync(con, tx, pool, block, ct);
 
-        // Deduct static reserve for tx fees
-		var coin = poolConfig.Template.As<CryptonoteCoinTemplate>();
-		var StaticTransactionFeeReserve = (coin.Symbol == "MRL") ? MoreloConstants.MoreloStaticTransactionFeeReserve : CryptonoteConstants.StaticTransactionFeeReserve;
+        // Deduct static reserve for tx fees 
+	var coin = poolConfig.Template.As<CryptonoteCoinTemplate>();
+	var StaticTransactionFeeReserve = (coin.Symbol == "MRL") ? MoreloConstants.MoreloStaticTransactionFeeReserve : CryptonoteConstants.StaticTransactionFeeReserve;
 
         blockRewardRemaining -= StaticTransactionFeeReserve;
 

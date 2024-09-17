@@ -5437,6 +5437,7 @@
         "subAddressPrefix": 961249,
         "subAddressPrefixTestnet": 18274,
         "subAddressPrefixStagenet": 2096098,
+        "coinbaseMinConfimations": 18,
         "explorerBlockLink": "https://explorer.morelonetwork.pl/block/$hash$",
         "explorerTxLink": "https://explorer.morelonetwork.pl/tx/{0}"
     },
