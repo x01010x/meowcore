@@ -1416,6 +1416,39 @@
         "explorerTxLink": "https://freecash.info/transaction?hash={0}",
         "explorerAccountLink": "https://freecash.info/address?address={0}"
     },
+    "anokas": {
+        "name": "Anokas",
+        "symbol": "ANOK",
+        "family": "progpow",
+        "progpower": "kawpow",
+        "website": "https://anokas.tech/",
+        "github": "https://github.com/anokastech/Anokas-mainnet",
+        "market": "https://www.coingecko.com/en/coins/anokas-network",
+        "twitter": "https://twitter.com/anokas_network",
+        "telegram": "https://t.me/anokas_tech",
+        "discord": "https://discord.com/invite/8B8pAtA2Y5",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "sha256d"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "shareMultiplier": 1,
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "explorerBlockLink": "https://explorer.anokas.tech/block/$hash$",
+        "explorerTxLink": "https://explorer.anokas.tech/tx/{0}",
+        "explorerAccountLink": "https://explorer.anokas.tech/address/{0}"
+    },
     "frencoin": {
         "name": "Frencoin",
         "symbol": "FREN",
