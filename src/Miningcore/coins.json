@@ -6145,6 +6145,36 @@
         "explorerTxLink": "https://explorer.nvolve.tech/tx/{0}",
         "explorerAccountLink": "https://explorer.nvolve.tech/address/{0}"
     },
+    "datromax": {
+        "name": "Datromax",
+        "symbol": "DTRX",
+        "family": "bitcoin",
+        "website": "https://datromax.com/",
+        "github": "https://github.com/datromax",
+        "twitter": "https://x.com/datromax",
+        "telegram": "https://t.me/datromax",
+        "discord": "https://discord.gg/3y2j7T3y",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "blake2s"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "explorerBlockLink": "https://explorer.datromax.com/block/$hash$",
+        "explorerTxLink": "https://explorer.datromax.com/tx/{0}",
+        "explorerAccountLink": "https://explorer.datromax.com/address/{0}"
+    },
     "kylacoin": {
         "name": "Kylacoin",
         "symbol": "KCN",
