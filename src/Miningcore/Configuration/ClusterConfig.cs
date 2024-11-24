@@ -444,6 +444,9 @@ public enum CryptonightHashType
     [EnumMember(Value = "gr")]
     Ghostrider,
 
+    [EnumMember(Value = "mike")]
+    Mike,
+
     [EnumMember(Value = "cn_lite0")]
     CryptonightLite0,
 

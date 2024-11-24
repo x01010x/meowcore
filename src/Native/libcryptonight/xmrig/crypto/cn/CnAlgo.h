@@ -120,7 +120,7 @@ public:
         }
 #       endif
 
-#       ifdef XMRIG_ALGO_GHOSTRIDER
+#       if defined(XMRIG_ALGO_GHOSTRIDER) || defined(XMRIG_ALGO_MIKE)
         if (algo == Algorithm::CN_GR_1) {
             return 0x3FFF0;
         }
@@ -160,7 +160,7 @@ template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_PICO_0>::mask() const 
 template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_GPU>::mask() const                { return 0x1FFFC0; }
 template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_UPX2>::mask() const               { return 0x1FFF0; }
 
-#ifdef XMRIG_ALGO_GHOSTRIDER
+#if defined(XMRIG_ALGO_GHOSTRIDER) || defined(XMRIG_ALGO_MIKE)
 template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_GR_0>::iterations() const         { return CN_ITER / 4; }
 template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_GR_1>::iterations() const         { return CN_ITER / 4; }
 template<> constexpr inline uint32_t CnAlgo<Algorithm::CN_GR_2>::iterations() const         { return CN_ITER / 2; }
