@@ -912,7 +912,7 @@ public class BitcoinJob
         if(coin.HasMasterNodes)
         {
             masterNodeParameters = BlockTemplate.Extra.SafeExtensionDataAs<MasterNodeBlockTemplateExtra>();
-
+			
             if(coin.HasSmartNodes)
             {
                 if(masterNodeParameters.Extra?.ContainsKey("smartnode") == true)
@@ -944,6 +944,14 @@ public class BitcoinJob
         if (coin.HasFounderFee)
 	{
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
+
+			if(coin.Symbol == "FTB")
+            {
+                if(founderParameters.Extra?.ContainsKey("fortune") == true)
+                {
+                    founderParameters.Founder = JToken.FromObject(founderParameters.Extra["fortune"]);
+                }
+            }
 
             if(coin.HasDevFee)
             {

@@ -1350,6 +1350,39 @@
         "explorerTxLink": "https://livenet.flocha.in/tx/{0}",
         "explorerAccountLink": "https://livenet.flocha.in/address/{0}"
     },
+    "fortuneblock": {
+        "name": "FortuneBlock",
+        "symbol": "FTB",
+        "family": "bitcoin",
+        "website": "https://fortuneblock.xyz/",
+        "market": "",
+        "github": "https://github.com/FortuneBlockTeam/fortuneblock",
+        "explorer": "https://explorer.fortuneblock.xyz/",
+        "twitter": "https://x.com/Fortune_Block",
+        "telegram": "",
+        "discord": "https://discord.com/invite/g4rwqYHkmd",
+        "coinbaseHasher": {
+            "hash": "sha256d"
+        },
+        "headerHasher": {
+            "hash": "mike"
+        },
+        "blockHasher": {
+            "hash": "reverse",
+            "args": [
+                {
+                    "hash": "sha256d"
+                }
+            ]
+        },
+        "hasFounderFee": true,
+        "hasMasterNodes": true,
+        "hasSmartNodes": true,
+        "shareMultiplier": 65536,
+        "explorerBlockLink": "https://explorer.fortuneblock.xyz/block/$hash$",
+        "explorerTxLink": "https://explorer.fortuneblock.xyz/tx/{0}",
+        "explorerAccountLink": "https://explorer.fortuneblock.xyz/address/{0}"
+    },
     "foxdcoin": {
         "name": "FoxDcoin",
         "canonicalName": "FoxDcoin",
