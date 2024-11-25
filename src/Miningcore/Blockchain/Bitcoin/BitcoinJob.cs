@@ -942,7 +942,7 @@ public class BitcoinJob
             developerParameters = BlockTemplate.Extra.SafeExtensionDataAs<DeveloperBlockTemplateExtra>();
 
         if (coin.HasFounderFee)
-	{
+        {
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
 
             if(coin.Symbol == "FTB")
@@ -960,7 +960,7 @@ public class BitcoinJob
                     founderParameters.Founder = JToken.FromObject(founderParameters.Extra["devfee"]);
                 }
             }
-	}
+        }
 
         if (coin.HasMinerDevFund)
             minerDevFundParameters = BlockTemplate.Extra.SafeExtensionDataAs<MinerDevFundTemplateExtra>("coinbasetxn", "minerdevfund");
@@ -968,10 +968,10 @@ public class BitcoinJob
         if (coin.HasMinerFund)
             minerFundParameters = BlockTemplate.Extra.SafeExtensionDataAs<MinerFundTemplateExtra>("coinbasetxn", "minerfund");
 
-	if(coin.HasCoinbaseDevReward)
+        if (coin.HasCoinbaseDevReward)
             CoinbaseDevRewardParams = BlockTemplate.Extra.SafeExtensionDataAs<CoinbaseDevRewardTemplateExtra>();
 
-	if(coin.HasFoundation)
+        if (coin.HasFoundation)
             foundationParameters = BlockTemplate.Extra.SafeExtensionDataAs<FoundationBlockTemplateExtra>();
 
         this.coinbaseHasher = coinbaseHasher;
