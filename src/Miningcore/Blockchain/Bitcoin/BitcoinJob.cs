@@ -945,7 +945,7 @@ public class BitcoinJob
 	{
             founderParameters = BlockTemplate.Extra.SafeExtensionDataAs<FounderBlockTemplateExtra>();
 
-			if(coin.Symbol == "FTB")
+            if(coin.Symbol == "FTB")
             {
                 if(founderParameters.Extra?.ContainsKey("fortune") == true)
                 {
