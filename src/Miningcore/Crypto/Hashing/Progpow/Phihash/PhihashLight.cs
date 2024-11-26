@@ -23,7 +23,7 @@ public class PhihashLight : IProgpowLight
             value.Dispose();
     }
 
-    public async Task<IProgpowCache> GetCacheAsync(ILogger logger, int block)
+    public async Task<IProgpowCache> GetCacheAsync(ILogger logger, int block, CancellationToken ct)
     {
         var epoch = block / PhicoinConstants.EpochLength;
         Cache result;
