@@ -31,8 +31,13 @@ using Miningcore.Crypto.Hashing.Ethash.Etchash;
 using Miningcore.Crypto.Hashing.Ethash.Ethash;
 using Miningcore.Crypto.Hashing.Ethash.Ethashb3;
 using Miningcore.Crypto.Hashing.Ethash.Ubqhash;
+using Miningcore.Crypto.Hashing.Progpow.Evrprogpow;
 using Miningcore.Crypto.Hashing.Progpow.Firopow;
 using Miningcore.Crypto.Hashing.Progpow.Kawpow;
+using Miningcore.Crypto.Hashing.Progpow.Meowpow;
+using Miningcore.Crypto.Hashing.Progpow.Meraki;
+using Miningcore.Crypto.Hashing.Progpow.Phihash;
+using Miningcore.Crypto.Hashing.Progpow.Sccpow;
 using Miningcore.Extensions;
 using Miningcore.Messaging;
 using Miningcore.Mining;
@@ -626,7 +631,7 @@ public class Program : BackgroundService
  ██║╚██╔╝██║██║██║╚██╗██║██║██║╚██╗██║██║   ██║██║     ██║   ██║██╔══██╗██╔══╝
  ██║ ╚═╝ ██║██║██║ ╚████║██║██║ ╚████║╚██████╔╝╚██████╗╚██████╔╝██║  ██║███████╗
 ");
-        Console.WriteLine(" https://github.com/blackmennewstyle/miningcore\n");
+        Console.WriteLine(" https://github.com/Kudaraidee/miningcore\n");
         Console.WriteLine(" Donate to one of these addresses to support the project:\n");
         Console.WriteLine(" ETH  - 0xbC059e88A4dD11c2E882Fc6B83F8Ec12E4CCCFad");
         Console.WriteLine(" BTC  - 16xvkGfG9nrJSKKo5nGWphP8w4hr2ZzVuw");
@@ -814,17 +819,39 @@ public class Program : BackgroundService
         // Configure RandomARQ
         RandomARQ.messageBus = messageBus;
 
+        // Configure RandomSCASH
+        RandomSCASH.messageBus = messageBus;
+
+        // Configure RandomXEQ
+        RandomXEQ.messageBus = messageBus;
+
         // Configure NexaPow
         Miningcore.Crypto.Hashing.Algorithms.NexaPow.messageBus = messageBus;
         
         // Configure BeamHash
         BeamHash.messageBus = messageBus;
         
+        // Configure Evrprogpow
+        Miningcore.Crypto.Hashing.Progpow.Evrprogpow.Cache.messageBus = messageBus;
+        
         // Configure FiroPow
         Miningcore.Crypto.Hashing.Progpow.Firopow.Cache.messageBus = messageBus;
         
         // Configure Kawpow
         Miningcore.Crypto.Hashing.Progpow.Kawpow.Cache.messageBus = messageBus;
+
+        // Configure Meowpow
+        Miningcore.Crypto.Hashing.Progpow.Meowpow.Cache.messageBus = messageBus;
+
+        // Configure Meraki
+        Miningcore.Crypto.Hashing.Progpow.Meraki.Cache.messageBus = messageBus;
+
+        // Configure Phihash
+        Miningcore.Crypto.Hashing.Progpow.Phihash.Cache.messageBus = messageBus;
+
+        // Configure Sccpow
+        Miningcore.Crypto.Hashing.Progpow.Sccpow.Cache.messageBus = messageBus;
+
     }
 
     private static async Task ConfigurePostgresCompatibilityOptions(IServiceProvider services)

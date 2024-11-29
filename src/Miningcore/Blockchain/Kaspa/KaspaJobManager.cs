@@ -288,6 +288,8 @@ public class KaspaJobManager : JobManagerBase<KaspaJob>
                         customShareHasher = new CShake256(null, Encoding.UTF8.GetBytes(KaspaConstants.CoinbaseHeavyHash));
 
                 return new KarlsencoinJob(customBlockHeaderHasher, customCoinbaseHasher, customShareHasher);
+            case "CSS":
+            case "PUG":
             case "NTL":
             case "NXL":
                 if(customBlockHeaderHasher is not Blake2b)
@@ -764,7 +766,7 @@ public class KaspaJobManager : JobManagerBase<KaspaJob>
         extraPoolPaymentProcessingConfig = pc.PaymentProcessing.Extra.SafeExtensionDataAs<KaspaPaymentProcessingConfigExtra>();
         
         maxActiveJobs = extraPoolConfig?.MaxActiveJobs ?? 8;
-        extraData = extraPoolConfig?.ExtraData ?? "Miningcore.developers[\"Cedric CRISPIN\"]";
+        extraData = extraPoolConfig?.ExtraData ?? "Miningcore";
         
         // extract standard daemon endpoints
         daemonEndpoints = pc.Daemons

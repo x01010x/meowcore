@@ -134,6 +134,12 @@ public abstract partial class CoinTemplate
     /// Telegram Group Link
     /// </summary>
     [JsonProperty(Order = -9)]
+    public string Github { get; set; }
+
+    /// <summary>
+    /// Telegram Group Link
+    /// </summary>
+    [JsonProperty(Order = -9)]
     public string Telegram { get; set; }
 
     /// <summary>
@@ -226,6 +232,21 @@ public partial class BitcoinTemplate : CoinTemplate
 
     [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
     public bool HasFounderFee { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasDevFee { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasCommunity { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasDeveloper { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasDataMining { get; set; }
+
+    [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool HasMinerDevFund { get; set; }
 
     [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
     public bool HasMinerFund { get; set; }
@@ -369,6 +390,15 @@ public enum CryptonightHashType
     [EnumMember(Value = "randomarq")]
     RandomARQ,
 
+    [EnumMember(Value = "randomscash")]
+    RandomSCASH,
+
+    [EnumMember(Value = "randomxeq")]
+    RandomXEQ,
+
+    [EnumMember(Value = "panthera")]
+    Panthera,
+
     [EnumMember(Value = "cn0")]
     Cryptonight0,
 
@@ -413,6 +443,9 @@ public enum CryptonightHashType
 
     [EnumMember(Value = "gr")]
     Ghostrider,
+
+    [EnumMember(Value = "mike")]
+    Mike,
 
     [EnumMember(Value = "cn_lite0")]
     CryptonightLite0,

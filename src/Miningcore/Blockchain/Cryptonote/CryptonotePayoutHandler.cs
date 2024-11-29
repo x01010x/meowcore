@@ -144,9 +144,10 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         decimal unlockedBalance = 0.0m;
         decimal balance = 0.0m;
 
-        // Not all Cryptonote coins are equal
+        // not all Cryptonote coins are equal
         switch(coin.Symbol)
         {
+            case "SAL":
             case "ZEPH":
                 var responseBalances = await rpcClientWallet.ExecuteAsync<GetBalancesResponse>(logger, CryptonoteWalletCommands.GetBalance, ct);
 
@@ -198,24 +199,51 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         if(!await EnsureBalance(balances.Sum(x => x.Amount), coin, ct))
             return false;
 
-        // build request
-        var request = new TransferRequest
+        TransferRequest request;
+        // not all Cryptonote coins are equal
+        switch(coin.Symbol)
         {
-            Destinations = balances
-                .Where(x => x.Amount > 0)
-                .Select(x =>
+            case "SAL":
+                // build request
+                request = new TransferRequest
                 {
-                    ExtractAddressAndPaymentId(x.Address, out var address, out _);
-
-                    return new TransferDestination
-                    {
-                        Address = address,
-                        Amount = (ulong) Math.Floor(x.Amount * coin.SmallestUnit)
-                    };
-                }).ToArray(),
-
-            GetTxKey = true
-        };
+                    Destinations = balances
+                        .Where(x => x.Amount > 0)
+                        .Select(x =>
+                        {
+                            ExtractAddressAndPaymentId(x.Address, out var address, out _);
+                            return new TransferDestination
+                            {
+                                Address = address,
+                                Amount = (ulong) Math.Floor(x.Amount * coin.SmallestUnit),
+                                AssetType = coin.Symbol
+                            };
+                        }).ToArray(),
+                    TransactionType = (uint) SalviumTransactionType.Transfer,
+                    SourceAsset = coin.Symbol,
+                    DestinationAsset = coin.Symbol,
+                    GetTxKey = true
+                };
+                break;
+            default:
+                // build request
+                request = new TransferRequest
+                {
+                    Destinations = balances
+                        .Where(x => x.Amount > 0)
+                        .Select(x =>
+                        {
+                            ExtractAddressAndPaymentId(x.Address, out var address, out _);
+                            return new TransferDestination
+                            {
+                                Address = address,
+                                Amount = (ulong) Math.Floor(x.Amount * coin.SmallestUnit)
+                            };
+                        }).ToArray(),
+                    GetTxKey = true
+                };
+                break;
+        }
 
         if(request.Destinations.Length == 0)
             return true;
@@ -276,20 +304,47 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         if(!await EnsureBalance(balance.Amount, coin, ct))
             return false;
 
-        // build request
-        var request = new TransferRequest
+        TransferRequest request;
+        // not all Cryptonote coins are equal
+        switch(coin.Symbol)
         {
-            Destinations = new[]
-            {
-                new TransferDestination
+            case "SAL":
+                // build request
+                request = new TransferRequest
                 {
-                    Address = address,
-                    Amount = (ulong) Math.Floor(balance.Amount * coin.SmallestUnit)
-                }
-            },
-            PaymentId = paymentId,
-            GetTxKey = true
-        };
+                    Destinations = new[]
+                    {
+                        new TransferDestination
+                        {
+                            Address = address,
+                            Amount = (ulong) Math.Floor(balance.Amount * coin.SmallestUnit),
+                            AssetType = coin.Symbol
+                        }
+                    },
+                    TransactionType = (uint) SalviumTransactionType.Transfer,
+                    PaymentId = paymentId,
+                    SourceAsset = coin.Symbol,
+                    DestinationAsset = coin.Symbol,
+                    GetTxKey = true
+                };
+                break;
+            default:
+                // build request
+                request = new TransferRequest
+                {
+                    Destinations = new[]
+                    {
+                        new TransferDestination
+                        {
+                            Address = address,
+                            Amount = (ulong) Math.Floor(balance.Amount * coin.SmallestUnit)
+                        }
+                    },
+                    PaymentId = paymentId,
+                    GetTxKey = true
+                };
+                break;
+        }
 
         if(!isIntegratedAddress)
             request.PaymentId = paymentId;
@@ -410,8 +465,9 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
 
                 var blockHeader = rpcResult.Response.BlockHeader;
 
-                // update progress
-                block.ConfirmationProgress = Math.Min(1.0d, (double) blockHeader.Depth / CryptonoteConstants.PayoutMinBlockConfirmations);
+                // update progressint 
+                int PayoutMinBlockConfirmations = (coin.Symbol == "GNTL") ? GntlConstants.GntlMinBlockConfirmations : (coin.Symbol == "MRL") ? MoreloConstants.MoreloMinBlockConfirmations : CryptonoteConstants.PayoutMinBlockConfirmations;
+                block.ConfirmationProgress = Math.Min(1.0d, (double) blockHeader.Depth / PayoutMinBlockConfirmations);
                 result.Add(block);
 
                 messageBus.NotifyBlockConfirmationProgress(poolConfig.Id, block, coin);
@@ -427,12 +483,12 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
                 }
 
                 // matured and spendable?
-                if(blockHeader.Depth >= CryptonoteConstants.PayoutMinBlockConfirmations)
+                if(blockHeader.Depth >= PayoutMinBlockConfirmations)
                 {
                     block.Status = BlockStatus.Confirmed;
                     block.ConfirmationProgress = 1;
                     
-                    // Not all Cryptonote coins are equal
+                    // not all Cryptonote coins are equal
                     switch(coin.Symbol)
                     {
                         case "ZEPH":
@@ -456,6 +512,26 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
 
                             block.Reward = (((blockHeader.Reward / coin.SmallestUnit) / (1m - reserveReward)) * miningReward) * coin.BlockrewardMultiplier;
                             break;
+
+                        case "XEQ":
+                            decimal EquilibriaMiningReward = EquilibriaConstants.EquilibriaMiningRewardInitial;
+                            decimal EquilibriaReserveReward = EquilibriaConstants.EquilibriaReserveRewardInitial;
+                            
+                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) * EquilibriaMiningReward) * coin.BlockrewardMultiplier;
+                            break;
+
+                        case "MRL":
+                            decimal MoreloReserveReward = MoreloConstants.MoreloReserveRewardInitial;
+                            
+                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) - MoreloReserveReward) * coin.BlockrewardMultiplier;
+                            break;
+
+                        case "GNTL":
+                            decimal GntlMiningReward = GntlConstants.GntlMiningRewardInitial;
+                            
+                            block.Reward = (((blockHeader.Reward / coin.SmallestUnit)) * GntlMiningReward) * coin.BlockrewardMultiplier;
+                            break;
+
                         default:
                             block.Reward = (blockHeader.Reward / coin.SmallestUnit) * coin.BlockrewardMultiplier;
                             break;
@@ -477,7 +553,10 @@ public class CryptonotePayoutHandler : PayoutHandlerBase,
         var blockRewardRemaining = await base.UpdateBlockRewardBalancesAsync(con, tx, pool, block, ct);
 
         // Deduct static reserve for tx fees
-        blockRewardRemaining -= CryptonoteConstants.StaticTransactionFeeReserve;
+		var coin = poolConfig.Template.As<CryptonoteCoinTemplate>();
+		var StaticTransactionFeeReserve = (coin.Symbol == "MRL") ? MoreloConstants.MoreloStaticTransactionFeeReserve : CryptonoteConstants.StaticTransactionFeeReserve;
+
+        blockRewardRemaining -= StaticTransactionFeeReserve;
 
         return blockRewardRemaining;
     }

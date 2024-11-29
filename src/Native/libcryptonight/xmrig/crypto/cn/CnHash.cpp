@@ -316,7 +316,7 @@ xmrig::CnHash::CnHash()
     m_map[Algorithm::CN_GPU]->data[AV_SINGLE_SOFT][Assembly::NONE] = cryptonight_single_hash_gpu<Algorithm::CN_GPU, true>;
 #   endif
 
-#   ifdef XMRIG_ALGO_GHOSTRIDER
+#   if defined(XMRIG_ALGO_GHOSTRIDER) || defined(XMRIG_ALGO_MIKE)
     ADD_FN(Algorithm::CN_GR_0);
     ADD_FN(Algorithm::CN_GR_1);
     ADD_FN(Algorithm::CN_GR_2);
